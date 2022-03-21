@@ -35,6 +35,8 @@ public class Beer {
     private Timestamp createdDate;
 
     @UpdateTimestamp
+    private Timestamp lastModified;
+
     private String beerName;
     private String beerStyle;
 
