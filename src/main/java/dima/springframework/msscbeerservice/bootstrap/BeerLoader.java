@@ -44,6 +44,7 @@ public class BeerLoader implements CommandLineRunner {
                     .minOnHand(40)
                     .build());
         }
+
         System.out.println("Beers loaded: " + repository.count() + " pcs");
     }
 }
