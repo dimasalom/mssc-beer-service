@@ -12,6 +12,10 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Version;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
+import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.UUID;
@@ -22,28 +26,31 @@ import java.util.UUID;
 @Builder
 public class BeerDto {
 
-   @Id
-   @GeneratedValue(generator = "UUID")
-   @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-   @Column(length = 36, columnDefinition = "varchar", updatable = false, nullable = false)
-   private UUID id;
+    @Null
+    private UUID id;
 
-   @Version
-   private Integer version;
+    @Null
+    private Integer version;
 
-   @CreationTimestamp
-   @Column(updatable = false)
-   private OffsetDateTime createdDate;
 
-   @UpdateTimestamp
-   private OffsetDateTime lastModifiedDate;
+    private OffsetDateTime createdDate;
 
-   private String beerName;
-   private BeerStyleEnum beerStyle;
+    @Null
+    private OffsetDateTime lastModifiedDate;
 
-   @Column(unique = true)
-   private Long upc;
+    @NotBlank
+    private String beerName;
 
-   private BigDecimal price;
-   private Integer quantityOnHand;
+    @NotNull
+    private BeerStyleEnum beerStyle;
+
+    @NotNull
+    @Positive
+    private Long upc;
+
+    @NotNull
+    @Positive
+    private BigDecimal price;
+
+    private Integer quantityOnHand;
 }

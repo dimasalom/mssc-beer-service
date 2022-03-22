@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.math.BigDecimal;
+
 import static java.util.UUID.randomUUID;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -35,9 +37,10 @@ class BeerControllerTest {
     @Test
     void saveBeer() throws Exception {
         BeerDto beerDto = BeerDto.builder()
-                .id(randomUUID())
                 .beerName("Some beer")
+                .price(new BigDecimal("4.66"))
                 .beerStyle(BeerStyleEnum.IPA)
+                .upc(1L)
                 .build();
 
         String beerDtoJonObj = mapper.writeValueAsString(beerDto);
@@ -51,9 +54,10 @@ class BeerControllerTest {
     @Test
     void updateBeer() throws Exception {
         BeerDto beerDto = BeerDto.builder()
-                .id(randomUUID())
                 .beerName("Some beer")
+                .price(new BigDecimal("4.66"))
                 .beerStyle(BeerStyleEnum.IPA)
+                .upc(1L)
                 .build();
 
         String beerDtoJonObj = mapper.writeValueAsString(beerDto);
