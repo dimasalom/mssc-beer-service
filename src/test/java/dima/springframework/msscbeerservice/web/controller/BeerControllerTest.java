@@ -1,10 +1,8 @@
 package dima.springframework.msscbeerservice.web.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dima.springframework.msscbeerservice.bootstrap.BeerLoader;
 import dima.springframework.msscbeerservice.serveces.BeerService;
 import dima.springframework.msscbeerservice.web.model.BeerDto;
-import dima.springframework.msscbeerservice.web.model.BeerStyleEnum;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -14,9 +12,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.math.BigDecimal;
 
 import static dima.springframework.msscbeerservice.bootstrap.BeerLoader.*;
+import static dima.springframework.msscbeerservice.web.model.BeerStyleEnum.*;
 import static java.util.UUID.randomUUID;
 
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -42,11 +41,11 @@ class BeerControllerTest {
         BeerDto beerDto = BeerDto.builder()
                 .beerName("Some beer")
                 .price(new BigDecimal("4.66"))
-                .beerStyle(BeerStyleEnum.IPA)
+                .beerStyle(IPA)
                 .upc(BEER_UPC_1)
                 .build();
 
-        given(service.getById(any())).willReturn(beerDto);
+        given(service.getById(any(), anyBoolean())).willReturn(beerDto);
 
         mockMvc.perform(get(URL_TEMPLATE + randomUUID())
                 .accept(APPLICATION_JSON))
@@ -58,7 +57,7 @@ class BeerControllerTest {
         BeerDto beerDto = BeerDto.builder()
                 .beerName("Some beer")
                 .price(new BigDecimal("4.66"))
-                .beerStyle(BeerStyleEnum.IPA)
+                .beerStyle(IPA)
                 .upc(BEER_UPC_1)
                 .build();
 
@@ -75,7 +74,7 @@ class BeerControllerTest {
         BeerDto beerDto = BeerDto.builder()
                 .beerName("Some beer")
                 .price(new BigDecimal("4.66"))
-                .beerStyle(BeerStyleEnum.IPA)
+                .beerStyle(IPA)
                 .upc(BEER_UPC_1)
                 .build();
 

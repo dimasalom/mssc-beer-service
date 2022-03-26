@@ -6,13 +6,20 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Component
 public class BeerLoader implements CommandLineRunner {
 
-    public static final String BEER_UPC_1 = "156321789654";
-    public static final String BEER_UPC_2 = "256321789654";
-    public static final String BEER_UPC_3 = "356321789654";
+    public static final String BEER_UPC_1 = "0631234200036";
+    public static final String BEER_UPC_2 = "0631234300019";
+    public static final String BEER_UPC_3 = "0083783375213";
+    public static final UUID BEER_1_UUID = UUID.fromString("0a818933-087d-47f2-ad83-2f986ed087eb");
+    public static final UUID BEER_2_UUID = UUID.fromString("a712d914-61ea-4623-8bd0-32c0f6545bfd");
+    public static final UUID BEER_3_UUID = UUID.fromString("026cc3c8-3a0c-4083-a05b-e908048c1b08");
+
+    public static final UUID id = UUID.randomUUID();
+
 
     private final BeerRepository repository;
 
@@ -32,8 +39,8 @@ public class BeerLoader implements CommandLineRunner {
 
             repository.save(Beer.builder()
                     .beerName("Carsberg")
-                    .beerStyle("Wagen")
-                    .quantityToBelow(200)
+                    .beerStyle("WAGEN")
+                    .quantityToBrew(200)
                     .upc(BEER_UPC_1)
                     .price(new BigDecimal("34.65"))
                     .minOnHand(12)
@@ -41,8 +48,8 @@ public class BeerLoader implements CommandLineRunner {
 
             repository.save(Beer.builder()
                     .beerName("Staropramen")
-                    .beerStyle("Obolon")
-                    .quantityToBelow(150)
+                    .beerStyle("LAGER")
+                    .quantityToBrew(150)
                     .upc(BEER_UPC_2)
                     .price(new BigDecimal("30.65"))
                     .minOnHand(40)
@@ -50,14 +57,14 @@ public class BeerLoader implements CommandLineRunner {
 
             repository.save(Beer.builder()
                     .beerName("Staropramen")
-                    .beerStyle("Carsberg")
-                    .quantityToBelow(150)
+                    .beerStyle("ALE")
+                    .quantityToBrew(150)
                     .upc(BEER_UPC_3)
                     .price(new BigDecimal("30.65"))
                     .minOnHand(40)
                     .build());
         }
 
-        System.out.println("Beers loaded: " + repository.count() + " pcs");
+        System.out.println("Beers loaded: " + repository.count() + " pcs. " + id);
     }
 }
