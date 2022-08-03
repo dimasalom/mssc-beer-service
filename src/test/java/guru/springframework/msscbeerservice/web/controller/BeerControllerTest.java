@@ -55,5 +55,6 @@ class BeerControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonBody))
                 .andExpect(status().isNoContent());
+
     }
 }
