@@ -17,6 +17,7 @@ import java.util.UUID;
 @Builder
 @Entity
 public class Beer {
+
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
@@ -28,12 +29,13 @@ public class Beer {
 
     @CreationTimestamp
     @Column(updatable = false)
-    private Timestamp createdDate;
+    private Timestamp createdData;
 
     @UpdateTimestamp
-    private Timestamp lastModifiedDate;
+    private Timestamp lastModifiedData;
 
     private String beerName;
+
     private String beerStyle;
 
     @Column(unique = true)
@@ -42,5 +44,6 @@ public class Beer {
     private BigDecimal price;
 
     private Integer minOnHand;
+
     private Integer quantityToBrew;
 }
