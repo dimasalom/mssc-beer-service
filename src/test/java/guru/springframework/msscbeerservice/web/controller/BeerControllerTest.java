@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
@@ -39,7 +40,13 @@ class BeerControllerTest {
 
     @Test
     void saveNewBeer() throws Exception {
-        BeerDto beerDto = BeerDto.builder().id(UUID.randomUUID()).beerName("Galaxt cat").beerStyle(BeerStyleEnum.ALE).upc(1234567l).build();
+        BeerDto beerDto = BeerDto.builder()
+                .id(UUID.randomUUID())
+                .beerName("Galaxt cat")
+                .beerStyle(BeerStyleEnum.ALE)
+                .upc(1234567l)
+                .price(new BigDecimal("13.99"))
+                .build();
         beerDto.setId(null);
         String jsonBody = objectMapper.writeValueAsString(beerDto);
 
@@ -51,7 +58,13 @@ class BeerControllerTest {
 
     @Test
     void updateBeerId() throws Exception {
-        BeerDto beerDto = BeerDto.builder().id(UUID.randomUUID()).beerName("Galaxt cat").beerStyle(BeerStyleEnum.ALE).upc(1234567l).build();
+        BeerDto beerDto = BeerDto.builder()
+                .id(UUID.randomUUID())
+                .beerName("Galaxt cat")
+                .beerStyle(BeerStyleEnum.ALE)
+                .upc(1234567l)
+                .price(new BigDecimal("12.99"))
+                .build();
         beerDto.setId(null);
         String jsonBody = objectMapper.writeValueAsString(beerDto);
 
