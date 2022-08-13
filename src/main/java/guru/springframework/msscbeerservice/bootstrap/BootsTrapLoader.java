@@ -58,6 +58,7 @@ public class BootsTrapLoader implements CommandLineRunner {
                     .upc(BEER_3_UPC)
                     .price(new BigDecimal("13.95"))
                     .build());
+            System.out.println("Saved");
         }
     }
 }

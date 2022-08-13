@@ -6,11 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Locale;
-import java.util.UUID;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 @Disabled
 @SpringBootTest
 class BeerInventoryServiceRestTemplateImplTest {
@@ -19,7 +14,7 @@ class BeerInventoryServiceRestTemplateImplTest {
     BeerInventoryService beerInventoryService;
 
     @Test
-    void getOnhandInventory() {
+    void getOnHandInventory() {
         Integer qoh = beerInventoryService.getOnHandInventory(BootsTrapLoader.BEER_1_UUID);
 
         System.out.println(qoh);
