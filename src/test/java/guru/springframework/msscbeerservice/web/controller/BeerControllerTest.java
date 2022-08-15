@@ -21,9 +21,9 @@ import java.time.OffsetDateTime;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -42,9 +42,9 @@ class BeerControllerTest {
 
     @Test
     void getBeerById() throws Exception {
-        given(beerService.getById(any(),anyBoolean())).willReturn(getValidBeerDto());
+        given(beerService.getById(any(), anyBoolean())).willReturn(getValidBeerDto());
 
-        mockMvc.perform(get("/api/v1/beer/" + UUID.randomUUID().toString()).accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/api/v1/beer/" + UUID.randomUUID().toString()).accept(APPLICATION_JSON))
                 .andExpect(status().isOk());
 
     }
@@ -65,7 +65,7 @@ class BeerControllerTest {
         given(beerService.saveNewBeer(any())).willReturn(getValidBeerDto());
 
         mockMvc.perform(post("/api/v1/beer/").
-                        contentType(MediaType.APPLICATION_JSON)
+                        contentType(APPLICATION_JSON)
                         .content(jsonBody))
                 .andExpect(status().isCreated());
     }
@@ -85,11 +85,20 @@ class BeerControllerTest {
         String jsonBody = objectMapper.writeValueAsString(beerDto);
 
         mockMvc.perform(put("/api/v1/beer/" + UUID.randomUUID().toString())
-                        .contentType(MediaType.APPLICATION_JSON)
+                        .contentType(APPLICATION_JSON)
                         .content(jsonBody))
                 .andExpect(status().isNoContent());
 
     }
+
+    @Test
+    void testGetBeerByUpc() throws Exception {
+        given(beerService.getBeerByUpc(anyString())).willReturn(getValidBeerDto());
+
+        mockMvc.perform(get("/api/v1/beerUpc/" + "0631234200036")
+                .accept(APPLICATION_JSON)).andExpect(status().isOk());
+    }
+
 
     BeerDto getValidBeerDto() {
         return BeerDto.builder()
